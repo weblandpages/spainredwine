@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>SpainRedWine.com — Vinos tintos, bodegas y regiones vinícolas de España</title>
+  <meta name="description" content="SpainRedWine.com: una plataforma dedicada al vino tinto español, sus regiones, variedades de uva, bodegas, maridajes y experiencias de enoturismo.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://spainredwine.com/">
+
+
+
+  <style>
+    :root{
+      --bg:#faf7f7;
+      --card:#ffffff;
+      --text:#261a1d;
+      --muted:#74676b;
+      --primary:#7d2438;
+      --primary-dark:#611b2b;
+      --border:#eadfe2;
+      --soft:#f6ecef;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+
+    body{
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,
+                  "Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+      background:
+        radial-gradient(circle at top right,rgba(125,36,56,.10),transparent 30rem),
+        linear-gradient(180deg,#fffafa 0%,var(--bg) 100%);
+      color:var(--text);
+      line-height:1.6;
+    }
+
+    .container{width:min(1120px,calc(100% - 40px));margin:0 auto}
+
+    header{
+      padding:22px 0;
+      border-bottom:1px solid rgba(234,223,226,.9);
+      background:rgba(255,255,255,.84);
+      backdrop-filter:blur(10px);
+      position:sticky;
+      top:0;
+      z-index:10;
+    }
+
+    nav{display:flex;align-items:center;justify-content:space-between;gap:24px}
+
+    .brand{
+      font-weight:800;
+      font-size:1.22rem;
+      letter-spacing:-.035em;
+      color:var(--text);
+      text-decoration:none;
+    }
+
+    .brand span{color:var(--primary)}
+    .nav-actions{display:flex;align-items:center;gap:18px}
+
+    .nav-link{
+      color:var(--muted);
+      text-decoration:none;
+      font-size:.95rem;
+      font-weight:600;
+    }
+
+    .language-switch{
+      display:flex;
+      align-items:center;
+      gap:4px;
+      padding:4px;
+      border:1px solid var(--border);
+      background:#fff;
+      border-radius:10px;
+    }
+
+    .language-switch button{
+      border:0;
+      background:transparent;
+      color:var(--muted);
+      font:inherit;
+      font-size:.82rem;
+      font-weight:800;
+      padding:6px 9px;
+      border-radius:7px;
+      cursor:pointer;
+    }
+
+    .language-switch button.active{background:var(--text);color:#fff}
+
+    .hero{
+      min-height:72vh;
+      display:flex;
+      align-items:center;
+      padding:80px 0 70px;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:70px;
+      align-items:center;
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 12px;
+      border:1px solid #ead6dc;
+      background:var(--soft);
+      color:var(--primary);
+      border-radius:999px;
+      font-size:.82rem;
+      font-weight:700;
+      margin-bottom:22px;
+    }
+
+    h1{
+      font-size:clamp(3rem,7vw,5.8rem);
+      line-height:.98;
+      letter-spacing:-.065em;
+      max-width:900px;
+    }
+
+    .hero p{
+      margin-top:26px;
+      font-size:1.18rem;
+      color:var(--muted);
+      max-width:720px;
+    }
+
+    .actions{margin-top:32px;display:flex;gap:14px;flex-wrap:wrap}
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      text-decoration:none;
+      border-radius:12px;
+      padding:13px 20px;
+      font-weight:700;
+      transition:.2s ease;
+    }
+
+    .btn-primary{
+      background:var(--primary);
+      color:#fff;
+      box-shadow:0 10px 30px rgba(125,36,56,.18);
+    }
+
+    .btn-primary:hover{background:var(--primary-dark);transform:translateY(-1px)}
+
+    .btn-secondary{
+      background:#fff;
+      color:var(--text);
+      border:1px solid var(--border);
+    }
+
+    .btn-secondary:hover{border-color:#d5c4c9;transform:translateY(-1px)}
+
+    .preview{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:24px;
+      padding:24px;
+      box-shadow:0 24px 70px rgba(75,35,45,.08);
+    }
+
+    .preview-top{display:flex;gap:7px;margin-bottom:24px}
+    .dot{width:9px;height:9px;border-radius:50%;background:#e3d8db}
+
+    .mini-card{
+      padding:18px;
+      border-radius:16px;
+      border:1px solid var(--border);
+      margin-top:12px;
+      background:#fffafa;
+    }
+
+    .mini-card strong{display:block;margin-bottom:4px}
+    .mini-card span{color:var(--muted);font-size:.92rem}
+
+    .section{padding:80px 0}
+
+    .section-title{
+      text-align:center;
+      max-width:820px;
+      margin:0 auto 42px;
+    }
+
+    .section-title h2{
+      font-size:clamp(2rem,4vw,3.2rem);
+      letter-spacing:-.045em;
+      line-height:1.05;
+    }
+
+    .section-title p{color:var(--muted);margin-top:14px}
+
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+    }
+
+    .card{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:18px;
+      padding:26px;
+    }
+
+    .icon{
+      width:42px;
+      height:42px;
+      border-radius:12px;
+      background:var(--soft);
+      display:grid;
+      place-items:center;
+      color:var(--primary);
+      font-weight:800;
+      margin-bottom:18px;
+    }
+
+    .card h3{font-size:1.1rem;margin-bottom:7px}
+    .card p{color:var(--muted);font-size:.95rem}
+
+    .cta{
+      margin:50px auto 80px;
+      background:var(--text);
+      color:#fff;
+      border-radius:24px;
+      padding:48px;
+      text-align:center;
+    }
+
+    .cta h2{
+      font-size:clamp(2rem,4vw,3rem);
+      letter-spacing:-.045em;
+    }
+
+    .cta p{color:#d8ced1;margin-top:10px}
+
+    footer{
+      border-top:1px solid var(--border);
+      padding:28px 0 40px;
+      color:var(--muted);
+      font-size:.9rem;
+    }
+
+    .footer-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+      flex-wrap:wrap;
+    }
+
+    @media(max-width:800px){
+      .hero{min-height:auto;padding-top:60px}
+      .hero-grid{grid-template-columns:1fr;gap:38px}
+      .cards{grid-template-columns:1fr}
+      .preview{max-width:560px}
+      .nav-link{display:none}
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="container">
+    <nav>
+      <a href="#" class="brand">Spain<span>RedWine</span></a>
+
+      <div class="nav-actions">
+        <a href="#about" class="nav-link" data-i18n="navAbout">Sobre el proyecto</a>
+
+        <div class="language-switch" aria-label="Language selector">
+          <button type="button" id="lang-es" class="active" onclick="setLanguage('es')">ES</button>
+          <button type="button" id="lang-en" onclick="setLanguage('en')">EN</button>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="eyebrow" data-i18n="eyebrow">✦ Vino tinto · Bodegas · España</div>
+
+      <h1 data-i18n="heroTitle">Descubre el vino tinto de España, región a región.</h1>
+
+      <p data-i18n="heroText">
+        SpainRedWine.com nace como una plataforma para explorar los grandes vinos tintos
+        de España, sus variedades de uva, denominaciones de origen, bodegas, maridajes
+        y experiencias de enoturismo.
+      </p>
+
+      <div class="actions">
+        <a href="#about" class="btn btn-primary" data-i18n="discover">Descubrir el proyecto</a>
+        <a href="#coming" class="btn btn-secondary" data-i18n="comingSoon">Próximamente</a>
+      </div>
+    </div>
+
+    <div class="preview">
+      <div class="preview-top">
+        <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      </div>
+
+      <div class="mini-card">
+        <strong data-i18n="regions">🍇 Regiones vinícolas</strong>
+        <span data-i18n="regionsText">Explora Rioja, Ribera del Duero, Priorat, Toro, Bierzo y otras zonas productoras.</span>
+      </div>
+
+      <div class="mini-card">
+        <strong data-i18n="grapes">🍷 Uvas y estilos</strong>
+        <span data-i18n="grapesText">Conoce Tempranillo, Garnacha, Mencía, Monastrell y otras variedades tintas españolas.</span>
+      </div>
+
+      <div class="mini-card">
+        <strong data-i18n="tourism">🏞️ Enoturismo</strong>
+        <span data-i18n="tourismText">Descubre bodegas, rutas del vino, catas y experiencias gastronómicas.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="about">
+  <div class="container">
+    <div class="section-title">
+      <h2 data-i18n="sectionTitle">Una guía para entender y disfrutar el vino tinto español.</h2>
+
+      <p data-i18n="sectionText">
+        Una plataforma pensada para reunir regiones, variedades, bodegas y experiencias
+        que ayuden a descubrir la diversidad del vino tinto elaborado en España.
+      </p>
+    </div>
+
+    <div class="cards">
+      <article class="card">
+        <div class="icon">01</div>
+        <h3 data-i18n="origins">Orígenes</h3>
+        <p data-i18n="originsText">Conoce denominaciones de origen, territorios, clima, suelos y estilos regionales.</p>
+      </article>
+
+      <article class="card">
+        <div class="icon">02</div>
+        <h3 data-i18n="wineries">Bodegas</h3>
+        <p data-i18n="wineriesText">Descubre productores, proyectos históricos y nuevas bodegas de distintas regiones españolas.</p>
+      </article>
+
+      <article class="card">
+        <div class="icon">03</div>
+        <h3 data-i18n="pairing">Maridaje y cultura</h3>
+        <p data-i18n="pairingText">Explora gastronomía, maridajes, catas y la cultura que rodea al vino tinto español.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="container" id="coming">
+  <div class="cta">
+    <h2 data-i18n="ctaTitle">Estamos preparando SpainRedWine.com</h2>
+    <p data-i18n="ctaText">Próximamente encontrarás regiones, bodegas, variedades y experiencias para descubrir el vino tinto de España.</p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="container footer-row">
+    <strong>SpainRedWine.com</strong>
+    <span>© 2026 SpainRedWine.com</span>
+  </div>
+</footer>
+
+<script>
+const translations = {
+  es:{
+    pageTitle:"SpainRedWine.com — Vinos tintos, bodegas y regiones vinícolas de España",
+    description:"SpainRedWine.com: una plataforma dedicada al vino tinto español, sus regiones, variedades de uva, bodegas, maridajes y experiencias de enoturismo.",
+    navAbout:"Sobre el proyecto",
+    eyebrow:"✦ Vino tinto · Bodegas · España",
+    heroTitle:"Descubre el vino tinto de España, región a región.",
+    heroText:"SpainRedWine.com nace como una plataforma para explorar los grandes vinos tintos de España, sus variedades de uva, denominaciones de origen, bodegas, maridajes y experiencias de enoturismo.",
+    discover:"Descubrir el proyecto",
+    comingSoon:"Próximamente",
+    regions:"🍇 Regiones vinícolas",
+    regionsText:"Explora Rioja, Ribera del Duero, Priorat, Toro, Bierzo y otras zonas productoras.",
+    grapes:"🍷 Uvas y estilos",
+    grapesText:"Conoce Tempranillo, Garnacha, Mencía, Monastrell y otras variedades tintas españolas.",
+    tourism:"🏞️ Enoturismo",
+    tourismText:"Descubre bodegas, rutas del vino, catas y experiencias gastronómicas.",
+    sectionTitle:"Una guía para entender y disfrutar el vino tinto español.",
+    sectionText:"Una plataforma pensada para reunir regiones, variedades, bodegas y experiencias que ayuden a descubrir la diversidad del vino tinto elaborado en España.",
+    origins:"Orígenes",
+    originsText:"Conoce denominaciones de origen, territorios, clima, suelos y estilos regionales.",
+    wineries:"Bodegas",
+    wineriesText:"Descubre productores, proyectos históricos y nuevas bodegas de distintas regiones españolas.",
+    pairing:"Maridaje y cultura",
+    pairingText:"Explora gastronomía, maridajes, catas y la cultura que rodea al vino tinto español.",
+    ctaTitle:"Estamos preparando SpainRedWine.com",
+    ctaText:"Próximamente encontrarás regiones, bodegas, variedades y experiencias para descubrir el vino tinto de España."
+  },
+
+  en:{
+    pageTitle:"SpainRedWine.com — Spanish red wines, wineries and wine regions",
+    description:"SpainRedWine.com: a platform dedicated to Spanish red wine, wine regions, grape varieties, wineries, food pairing and wine tourism experiences.",
+    navAbout:"About the project",
+    eyebrow:"✦ Red Wine · Wineries · Spain",
+    heroTitle:"Discover Spanish red wine, region by region.",
+    heroText:"SpainRedWine.com is designed as a platform for exploring Spain's red wines, grape varieties, appellations, wineries, food pairings and wine tourism experiences.",
+    discover:"Discover the project",
+    comingSoon:"Coming soon",
+    regions:"🍇 Wine regions",
+    regionsText:"Explore Rioja, Ribera del Duero, Priorat, Toro, Bierzo and other Spanish wine regions.",
+    grapes:"🍷 Grapes & styles",
+    grapesText:"Discover Tempranillo, Garnacha, Mencía, Monastrell and other Spanish red grape varieties.",
+    tourism:"🏞️ Wine tourism",
+    tourismText:"Discover wineries, wine routes, tastings and gastronomic experiences.",
+    sectionTitle:"A guide to understanding and enjoying Spanish red wine.",
+    sectionText:"A platform designed to bring together regions, grape varieties, wineries and experiences that showcase the diversity of red wine made in Spain.",
+    origins:"Origins",
+    originsText:"Learn about appellations, territories, climate, soils and regional wine styles.",
+    wineries:"Wineries",
+    wineriesText:"Discover established producers, historic projects and new wineries across Spain.",
+    pairing:"Pairing & culture",
+    pairingText:"Explore gastronomy, food pairings, tastings and the culture surrounding Spanish red wine.",
+    ctaTitle:"We are building SpainRedWine.com",
+    ctaText:"Wine regions, wineries, grape varieties and experiences for discovering Spanish red wine will be available soon."
+  }
+};
+
+function setLanguage(lang){
+  const t = translations[lang] || translations.es;
+
+  document.documentElement.lang = lang;
+  document.title = t.pageTitle;
+
+  const meta = document.querySelector('meta[name="description"]');
+  if(meta) meta.setAttribute("content", t.description);
+
+  document.querySelectorAll("[data-i18n]").forEach(el=>{
+    const key = el.getAttribute("data-i18n");
+    if(t[key]) el.textContent = t[key];
+  });
+
+  document.getElementById("lang-es").classList.toggle("active", lang==="es");
+  document.getElementById("lang-en").classList.toggle("active", lang==="en");
+
+  localStorage.setItem("spainredwine-language", lang);
+}
+
+const savedLanguage = localStorage.getItem("spainredwine-language");
+const browserLanguage = (navigator.language || "").toLowerCase();
+
+let initialLanguage = "es";
+if(browserLanguage.startsWith("en")) initialLanguage = "en";
+
+setLanguage(savedLanguage || initialLanguage);
+</script>
+</body>
+</html>
